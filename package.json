@@ -1,0 +1,19 @@
+{
+  "name": "cyberpunk2020_intrepid",
+  "version": "1.0.0",
+  "description": "Discord application and bot for running a Cyberpunk RED DnD Campaign",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/oakypokey/cyberpunk2020_intrepid.git"
+  },
+  "author": "Oakypokey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oakypokey/cyberpunk2020_intrepid/issues"
+  },
+  "homepage": "https://github.com/oakypokey/cyberpunk2020_intrepid#readme"
+}

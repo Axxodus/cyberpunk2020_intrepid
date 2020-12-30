@@ -50,30 +50,45 @@ class Character{
         })
     }
 
+    getCharacterInfoReadable = () => {
+        return `Here is the character information for ${this.dm.recipient.username}: \n
+        \t Name: ${this.name} \n
+        \t Age: ${this.age} \n
+        \t Role: ${this.role}\n
+        \t Pronouns: ${this.pronouns}\n
+        -----------END------------`
+    }
+
 }
 
 
 module.exports = {
-	name: 'build_character.exe',
+	name: 'b',
     description: 'Begins the character generation process for everyone in the channel.',
     args: false,
 	execute(message, args) {
         message.guild.members.fetch().then((users) => {
+            let GM = users.find(user => user.roles.cache.find(r => r.name == "GM"))
+            let GM_direct = GM.createDM();
+
             users.forEach((user) => {
-                if(!user.user.bot){
+                if(!user.user.bot && user.roles.cache.find(r => r.name == "Player")){
                     let direct_message = user.createDM();
                     direct_message.then(dm => {
                         let character = new Character(dm)
                         character.setCharacterName()
                         .then(character => character.setCharacterAge())
                         .then(character => character.setCharacterPronouns())
-                        .then(character => console.log(character))
-
+                        .then(character => {
+                            GM_direct.then(dm => dm.send(character.getCharacterInfoReadable()))
+                        })
                     }).catch(e => {
                         console.log(`An error occured: ${e}`)
                     })
                 }
             })
+
+            
         })
         
 		message.channel.send(`Please check the console.`);
